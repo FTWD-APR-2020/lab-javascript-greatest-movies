@@ -1,6 +1,34 @@
 /* eslint no-restricted-globals: 'off' */
 
 // Iteration 1: Ordering by year - Order by year, ascending (in growing order)
+const orderByYear = (arr) => {
+  // concat() method combines two arrays
+  let sortedArr = [...arr]  // ... spread operator - we make a copy of the arr https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+
+  return sortedArr.sort((a,b) => {
+    if(a.year === b.year){
+      return a.title.localeCompare(b.title) // localeCompare - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+    } else {
+      return a.year - b.year
+    }
+  })
+
+  // return sortedArr.sort((a,b) => {
+  //   if(a.year === b.year){      // if the year is the same then order by title 
+  //     if(a.title < b.title){
+  //       return -1     // the position of the values do not change
+  //     } else if(a.title > b.title){
+  //       return 1      // the position of the values are swapped 
+  //     } else {
+  //       return 0      // the values are the same, no changes 
+  //     }
+  //   } else {
+  //     return a.year - b.year
+  //   }
+  // })
+
+  // return sortedArr
+}
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct
 
