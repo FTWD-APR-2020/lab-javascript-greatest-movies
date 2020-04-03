@@ -81,7 +81,59 @@ function orderAlphabetically(arr) {
 
 // Iteration 4: All rates average - Get the average of all rates with 2 decimals
 
+// solution 1
+const ratesAverage = (arr) => {
+  let sum = 0;
+  if(!arr.length) {     // if arr.length is = 0 = false                !false = true
+    return 0
+  }
+
+  for(let i=0; i<arr.length; i++){
+    if(arr[i].rate){     // check if the rate of the movie exists
+      sum += arr[i].rate;
+    }
+  }
+
+  let avg = sum/arr.length;
+  return Number (avg.toFixed(2));   // could also use parseFloat
+} 
+
+// solution 2
+// const ratesAverage = (arr) => {
+//   // return Number((arr.reduce((sum, curr) => sum + Number(curr.rate), 0)/arr.length).toFixed(2)) || 0;
+//     if(!arr.length) {     // if arr.length is = 0 = false                !false = true
+//     return 0
+//   }
+
+//   let sum = arr.reduce((accum, currentMovie) => {
+//     if(currentMovie.rate){
+//       return accum + currentMovie.rate
+//     }
+//   }, 0)
+
+//   let avg = sum/arr.length
+//   return Number(avg.toFixed(2))
+// } 
+
 // Iteration 5: Drama movies - Get the average of Drama Movies
+// const dramaMoviesRate = (arr) => {
+//  let dramaArr =[]
+//   for(let i=0; i<arr.length; i++){
+//     if(arr[i].genre.includes("Drama")){
+//       dramaArr.push(arr[i])
+//     }
+//   }
+//   return ratesAverage(dramaArr);
+// }
+
+const dramaMoviesRate = (arr) => {
+  // return ratesAverage(arr.filter(curr => curr.genre.indexOf("Drama") >= 0)) || 0;}
+    let dramaArr = arr.filter((eachMovie) => {
+      return eachMovie.genre.indexOf("Drama") >= 0
+    })
+
+    return ratesAverage(dramaArr)
+  }
 
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
 
