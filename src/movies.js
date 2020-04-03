@@ -58,4 +58,8 @@ const howManyMovies = (movies) => {
 
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
 
+const turnHoursToMinutes = () => {
+    console.log('this is my garbage code ')
+}
+
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
