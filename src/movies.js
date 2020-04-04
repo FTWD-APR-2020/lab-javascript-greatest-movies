@@ -1,7 +1,7 @@
 /* eslint no-restricted-globals: 'off' */
 
 // Iteration 1: Ordering by year - Order by year, ascending (in growing order)
-const orderByYear = arr => {
+const orderByYear = (arr) => {
   // concat() method combines two arrays
   let sortedArr = [...arr]; // ... spread operator - we make a copy of the arr https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
 
@@ -31,7 +31,7 @@ const orderByYear = arr => {
 };
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct
-const howManyMovies = movies => {
+const howManyMovies = (movies) => {
   // let totalCount = 0;
   // for(let i=0; i<movies.length; i++){
   //     let bothConditions = movies[i].genre.includes('Drama') && movies[i].director.includes('Steven Spielberg')
@@ -41,7 +41,7 @@ const howManyMovies = movies => {
   // }
   // return totalCount;
 
-  let filteredMovies = movies.filter(obj => {
+  let filteredMovies = movies.filter((obj) => {
     if (obj.director === "Steven Spielberg" && obj.genre.includes("Drama")) {
       return obj;
     }
@@ -55,11 +55,11 @@ function orderAlphabetically(arr) {
   // sort -> mutates the original array
   let copyOfTheArray = [...arr];
 
-  copyOfTheArray.sort(function(a, b) {
+  copyOfTheArray.sort(function (a, b) {
     return a.title.localeCompare(b.title);
   }); // sort the entire 250 movies
   let firstTwenty = copyOfTheArray.slice(0, 20); // get the first 20 movies
-  let firstTwentyTitles = firstTwenty.map(movie => {
+  let firstTwentyTitles = firstTwenty.map((movie) => {
     return movie.title;
   }); // get the array of first 20 titles
   return firstTwentyTitles; // return the array of titles
@@ -84,19 +84,21 @@ function orderAlphabetically(arr) {
 // solution 1
 const ratesAverage = (arr) => {
   let sum = 0;
-  if(!arr.length) {     // if arr.length is = 0 = false                !false = true
-    return 0
+  if (!arr.length) {
+    // if arr.length is = 0 = false                !false = true
+    return 0;
   }
 
-  for(let i=0; i<arr.length; i++){
-    if(arr[i].rate){     // check if the rate of the movie exists
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].rate) {
+      // check if the rate of the movie exists
       sum += arr[i].rate;
     }
   }
 
-  let avg = sum/arr.length;
-  return Number (avg.toFixed(2));   // could also use parseFloat
-} 
+  let avg = sum / arr.length;
+  return Number(avg.toFixed(2)); // could also use parseFloat
+};
 
 // solution 2
 // const ratesAverage = (arr) => {
@@ -113,7 +115,7 @@ const ratesAverage = (arr) => {
 
 //   let avg = sum/arr.length
 //   return Number(avg.toFixed(2))
-// } 
+// }
 
 // Iteration 5: Drama movies - Get the average of Drama Movies
 // const dramaMoviesRate = (arr) => {
@@ -128,13 +130,50 @@ const ratesAverage = (arr) => {
 
 const dramaMoviesRate = (arr) => {
   // return ratesAverage(arr.filter(curr => curr.genre.indexOf("Drama") >= 0)) || 0;}
-    let dramaArr = arr.filter((eachMovie) => {
-      return eachMovie.genre.indexOf("Drama") >= 0
-    })
+  let dramaArr = arr.filter((eachMovie) => {
+    return eachMovie.genre.indexOf("Drama") >= 0;
+  });
 
-    return ratesAverage(dramaArr)
-  }
+  return ratesAverage(dramaArr);
+};
 
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
+
+function timeConverter(duration) {
+  // '2h 5m' '2h' '36m'
+  let minutes = 0;
+  // for (let i = 0; i < duration.length; i++) {
+  //   if (duration[i] === "h") {
+  //     minutes += Number(duration[i - 1]) * 60;
+  //   } else if (duration[i] === "m") {
+  //     minutes +=
+  //       duration[i - 2] === " "
+  //         ? Number(duration[i - 1])
+  //         : Number(duration[i - 2] + duration[i - 1]);
+  //     // if (duration[i - 2] === " ") {
+  //     //   minutes += Number(duration[i - 1]);
+  //     // } else {
+  //     //   minutes += Number(duration[i - 2] + duration[i - 1]);
+  //     // }
+  //   }
+  // }
+  let array = duration.split("h");
+  if (array.length === 1) {
+    minutes += parseInt(array[0]);
+  } else if (array[1] === "") {
+    minutes += array[0] * 60;
+  } else {
+    minutes += array[0] * 60 + parseInt(array[1]);
+  }
+  return minutes;
+}
+
+function turnHoursToMinutes(movies) {
+  return movies.map(function (movie) {
+    let copyOfMovie = { ...movie };
+    copyOfMovie.duration = timeConverter(movie.duration);
+    return copyOfMovie;
+  });
+}
 
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
